@@ -22,3 +22,8 @@ comment the next line of the migration
 * docker_clean_ps
 * docker rmi $(docker images -a -q)
 * docker system prune -a
+
+
+**Postman**
+[Pulpo.postman_collection.json](https://github.com/MiguelAngelVM/node_typeorm_angular_example/files/11127366/Pulpo.postman_collection.json)
+**Note, change te extension to json**

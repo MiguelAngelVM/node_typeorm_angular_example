@@ -25,5 +25,5 @@ comment the next line of the migration
 
 
 **Postman**
-[Pulpo.postman_collection.json](https://github.com/MiguelAngelVM/node_typeorm_angular_example/files/11127366/Pulpo.postman_collection.json)
+[Pulpo.postman_collection.txt](https://github.com/MiguelAngelVM/node_typeorm_angular_example/files/11127366/Pulpo.postman_collection.txt)
 **Note, change te extension to json**

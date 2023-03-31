@@ -1,5 +1,6 @@
 # node_typeorm_angular_example
 
+**Required docker**
 
 **Install backend**
 * cd backend

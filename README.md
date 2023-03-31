@@ -27,3 +27,5 @@ comment the next line of the migration
 **Postman**
 [Pulpo.postman_collection.txt](https://github.com/MiguelAngelVM/node_typeorm_angular_example/files/11127366/Pulpo.postman_collection.txt)
 **Note, change te extension to json and import**
+<img width="1423" alt="Captura de Pantalla 2023-03-31 a la(s) 17 55 08" src="https://user-images.githubusercontent.com/11168366/229251978-90080efa-b68f-4db4-8941-bceeb44ebce3.png">
+

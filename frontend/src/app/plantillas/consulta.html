@@ -1,0 +1,71 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+	<internal-header [loader]="loader" (showFilter)="isCollapsed = $event"></internal-header>
+	<div class="flex-auto p-6  overflow-y-auto" cdkScrollable>
+		<div [hidden]="!isCollapsed" class="divfiltros">
+			<form #formPerfil="ngForm" id="form-perfil">
+				<div class="row">
+					<div class="col-lg-{{filtro.tipo=='date' ? 2 : 4 }}" *ngFor="let filtro of filtros">
+						<mat-form-field appearance="outline" *ngIf="filtro.tipo=='text'" class="input-group">
+							<mat-label>{{filtro.nombre}}</mat-label>
+							<input matInput placeholder="{{filtro.nombre}}" [(ngModel)]="filtro.contenido" name="{{filtro.nombre}}"
+								type="text">
+						</mat-form-field>
+
+						<mat-form-field appearance="outline" *ngIf="filtro.tipo=='number'" class="input-group">
+							<mat-label>{{filtro.nombre}}</mat-label>
+							<input matInput placeholder="{{filtro.nombre}}" [(ngModel)]="filtro.contenido" name="{{filtro.nombre}}"
+								type="number">
+						</mat-form-field>
+						<mat-checkbox [(ngModel)]="filtro.contenido" *ngIf="filtro.tipo=='check'" name="{{filtro.nombre}}"
+						style="margin-top: 1em;" class="input-group">
+							{{filtro.nombre}}
+						</mat-checkbox>
+						<label *ngIf="filtro.tipo=='vacio'"></label>
+						<mat-form-field appearance="outline" *ngIf="filtro.tipo=='select'" class="input-group">
+							<mat-label>{{filtro.nombre}}</mat-label>
+							<mat-select placeholder="{{filtro.nombre}}" name="{{filtro.nombre}}" [(ngModel)]="filtro.contenido">
+								<mat-option *ngFor="let item of filtro.lista" [value]=item.codigo>{{item.userName}}</mat-option>
+							</mat-select>
+						</mat-form-field>
+						<mat-form-field appearance="outline" *ngIf="filtro.tipo=='date'" class="input-group col-lg-{{filtro.tipo=='date' ? 2 : 4 }}">
+							<mat-label>{{filtro.nombre}}</mat-label>
+							<input matInput [matDatepicker]="dpF" [matTooltip]="filtro.nombre" name="{{filtro.nombre}}"
+								[(ngModel)]="filtro.contenido" placeholder="{{filtro.nombre}}">
+							<mat-datepicker-toggle matSuffix [for]="dpF"></mat-datepicker-toggle>
+							<mat-datepicker #dpF></mat-datepicker>
+						</mat-form-field>
+						<mat-form-field appearance="outline" *ngIf="filtro.tipo=='auto'" class="input-group">
+							<mat-label>{{filtro.nombre}}</mat-label>
+							<input (ngModelChange)="filtro.filter($event)" [formControl]="this[filtro.formControl]" type="text"
+								name="{{filtro.nombre}}" [(ngModel)]="filtro.contenido" placeholder="{{filtro.nombre}}"
+								aria-label="Number" matInput [matAutocomplete]="auto">
+							<mat-autocomplete #auto="matAutocomplete" [displayWith]="filtro.fnDisplay">
+								<mat-option *ngFor="let option of this[filtro.filteredOptions] | async" [value]="option">
+								{{option[filtro.display]}}
+								</mat-option>
+							</mat-autocomplete>
+						</mat-form-field>
+					</div>
+				</div>
+				<orden4MSource 
+				[columnas]="columnas" 
+				[funcionesMenu]="funcionesMenu" 
+				[metodos]="metodos"
+				(completoEvent)="isCollapsed = false; complete = 1" [complete]="complete"
+				(changeInputEvent)="metodos = $event"></orden4MSource>
+				
+			</form>
+		</div>
+		<tabla4MSource 
+			[key]="key" 
+			[columnas]="columnas" 
+			[data]="data" 
+			[texto1]="texto1" 
+			[funcionesMenu]="funcionesMenu"
+			(camposEliminarEvent)="camposEliminar = $event" 
+			[camposEliminar]="camposEliminar">
+		</tabla4MSource>
+		
+	</div>
+	
+</div>

@@ -1,0 +1,218 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Material palettes:
+// $mat-red, $mat-pink, $mat-purple, $mat-deep-purple, $mat-indigo, $mat-blue, $mat-light-blue, $mat-cyan, $mat-teal,
+// $mat-green, $mat-light-green, $mat-lime, $mat-yellow, $mat-amber, $mat-orange, $mat-deep-orange, $mat-brown,
+// $mat-grey, $mat-blue-grey
+.col-centrado{
+    text-align: center;
+  }
+  .cdk-overlay-container {
+    position: fixed;
+    z-index: 10000;
+  }
+  // input[type=text] {
+  //   color:#0D3F58;
+  // }
+  .labelPrimary{
+    color:#0D3F58;
+  }
+
+  .divfiltros {
+    /* background: #f4f4f4; */
+    /* border-top: 1px solid #e9e9e9; */
+    border-bottom: 1px solid #e9e9e9;
+    margin-bottom: 1em;
+  }
+  
+  .btn-filtro {
+    text-align: right;
+    margin-bottom: 22px;
+  }
+  
+   .pagination > .active > a { background-color: #64B5F6; }
+   td, th {
+    white-space: nowrap;
+  }
+  .table th,
+  .table td {
+    padding: 0rem;
+    vertical-align: inherit;
+    border-top: 1px solid #eceeef;
+    padding-right: 1em;
+    padding-left: 1em; }
+  button.mat-menu-item{
+    height: 100%;
+  }
+  
+  
+  
+  /* Datos para el calendario*/
+  
+  
+  .day {
+    width: 1.5em;
+    height: 1.5em;
+  }
+  
+  .day:nth-of-type(7n+1) {
+    color: #f09;
+  }
+  
+  .to.day {
+    color: white;
+    background: #f09;
+    border-radius: 50%;
+  }
+  
+  .month {
+    width: calc(1.5em * 7);
+    padding: 1em;
+    cursor: pointer;
+  }
+  
+  h4#year {
+    font-size: 1em;
+    text-transform: uppercase;
+    color: #f09;
+  }
+  
+  h1#year {
+    font-size: 2em;
+    height: 29px;
+    font-weight: normal;
+    padding: 1em 1em .5em 1em;
+    margin-bottom: .5em;
+    border-bottom: 5px double #008FBE;
+  }
+  
+  .no-flexbox .day {
+    text-align: center;
+    float: left;
+    line-height: 1.5em;
+  }
+  
+  .no-flexbox h4 {
+    text-align: center;
+  }
+  
+  .no-flexbox h1 {
+    width: 4em;
+  }
+  
+  
+  /* FLEXBOX styles*/
+  
+  #divSection {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .h4Day {
+    justify-content: center;
+    flex: 1 0 100%;
+  }
+  
+  .h1Year {
+    justify-content: center;
+    align-self: stretch;
+  }
+  
+  .calendar,
+  .month {
+    flex-wrap: wrap;
+  }
+  
+  section {
+    flex-direction: column;
+    align-self: center;
+  }
+  
+  .month {
+    align-items: flex-start;
+  }
+  
+  .day {
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  /*for a Spanish like calendar  
+    .month .day:nth-of-type(1){order:7!important;}
+    .month .day:nth-of-type(8){order:-1!important;}
+     
+  */
+  
+  script {
+    display: none;
+  }
+  
+  .cloneCont {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -5em;
+    margin-top: -10.89em;
+    box-shadow: 0px 0px 5px 1px #ccc;
+    transform: scale(2, 2);
+    background: rgba(255, 255, 255, .9);
+    animation: redimensionar .5s cubic-bezier(.86, 0, .07, 1);
+  }
+  
+  .month.cloneMonth {
+    display: flex
+  }
+  
+  .month.cloneMonth:after {
+    content: "\02718";
+    color: #f09;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+  }
+  
+  .cloneCont.trans {
+    transform: translateY(1000px);
+    background: rgba(255, 255, 255, .9);
+    opacity: 0;
+    animation: trasladar .5s cubic-bezier(.86, 0, .07, 1);
+  }
+  
+  @keyframes redimensionar {
+    0% {
+      transform: scale(1, 1);
+      background: rgba(255, 255, 255, .9);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(2, 2);
+      background: rgba(255, 255, 255, .9);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes trasladar {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(1000px);
+      opacity: 0;
+    }
+  }
+  thead {
+    width: 500px;
+    overflow-x: auto;
+}
+ 
+tbody {
+    width: 500px;
+    overflow-x: auto;
+}

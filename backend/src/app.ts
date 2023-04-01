@@ -46,8 +46,9 @@ AppDataSource.initialize()
     // 4. Cors
     app.use(
       cors({
-        origin: config.get<string>('origin'),
-        credentials: true,
+        origin: true,
+        credentials: true, 
+        methods: 'POST,GET,PUT,OPTIONS,DELETE'
       })
     );
 

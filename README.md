@@ -82,7 +82,8 @@ comment the next line of the migration
 
 **Login screen**
 
-<img width="1437" alt="Captura de Pantalla 2023-03-31 a la(s) 18 32 24" src="https://user-images.githubusercontent.com/11168366/229256620-68bfecb9-1c4d-4038-b653-0cb8cc8a52e4.png">
+<img width="1437" alt="Captura de Pantalla 2023-04-03 a la(s) 1 42 11" src="https://user-images.githubusercontent.com/11168366/229456433-d5572922-d93c-4809-8213-dbff934fe6e1.png">
+
 
 **Logout screen**
 

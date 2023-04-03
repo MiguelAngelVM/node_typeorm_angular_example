@@ -51,7 +51,7 @@ export class ListComponent implements OnInit {
   };
   public complete: boolean = false;
   public key: string = "id";
-  public data: Array<Object>;
+  public data: Array<Object> = [];
   public deleteFields: Object = {};
   public ctrltColor = new FormControl();
   public filteredColor: Observable<Object>;
@@ -152,7 +152,7 @@ export class ListComponent implements OnInit {
   getFilters = async () => {
     const statusFilter: Filter = await this.getStatusFilter();
     const autocomplete: Array<Filter> = await this.getAutocompletes();
-    this.filters = [
+    const filters = [
       {
         name: "ID",
         field: "id",
@@ -176,22 +176,27 @@ export class ListComponent implements OnInit {
         type: "check",
       },
     ];
+    this.filters = filters;
+    return filters;
   };
 
-  onClickFilter = async () => {
+  onClickFilter = async ():Promise<boolean> => {
     try {
 			this.loader = true;
       let json=JSON.stringify({ filters: this.filters, methods: this.methods });
       json = this.app.formatoXML(json);
-      Api.get(`vehicle?params=${json}`).then(response => {
+      const complete = await Api.get(`vehicle?params=${json}`).then(response => {
         this.loader = false;
         this.data = response?.data?.result;
+        return true;
       }).catch(() => {
-        return [];
+        return false;
       });
+      return complete;
     } catch (e) {
 			this.data = [];
 			this.loader = false;
+      return false;
 		}
   }
 

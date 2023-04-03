@@ -7,7 +7,7 @@ import { map, startWith } from "rxjs/operators";
 
 @Injectable()
 export class App {
-  constructor(public http: HttpClient, public router: Router) {}
+  constructor( ) {}
   public color;
 
   mouseEnter(celda) {

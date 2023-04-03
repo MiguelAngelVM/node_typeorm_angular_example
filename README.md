@@ -54,6 +54,7 @@
 * npm install
 * docker compose up -d
 * npm run db:push
+* npm start
 
  
 

@@ -26,17 +26,20 @@
     [strokeWidth]="5"
     *ngIf="loader == 1"
   ></mat-spinner>
-  <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
+  <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2" *ngIf="create===false">
     <button mat-raised-button (click)="onClickOpenFilter()">
       <mat-icon >filter_list</mat-icon>
     </button>
     <button mat-raised-button (click)="this.onClickFilter.emit()"><strong>Filtrar</strong></button>
-    <button mat-raised-button (click)="this.onClickDelete.emit($event)"><strong>Eliminar</strong></button>
-    <button mat-raised-button><strong>Nuevo</strong></button>
+    <button mat-raised-button (click)="this.onClickDelete.emit()"><strong>Eliminar</strong></button>
+    <button mat-raised-button (click)="this.router.navigate(['/vehicle/create'])"><strong>Nuevo</strong></button>
+  </div>
+  <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2" *ngIf="create===true">
+    <button mat-raised-button (click)="this.onClickStore.emit()"><strong>Guardar</strong></button>
+    <button mat-raised-button (click)="this.router.navigate(['/vehicle/list'])"><strong>Consultar</strong></button>
   </div>
 </div>
-<!-- Header -->
-<div class="bg-card">
+<div class="bg-card"  *ngIf="create===false">
   <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
     <div
       class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-3"

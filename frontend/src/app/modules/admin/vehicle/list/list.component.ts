@@ -6,11 +6,38 @@ import { App } from "app/app";
 import { Columns } from "../../../../core/table/columns.types";
 import { Filter, Select } from "../../../../core/table/filter.types";
 import Api from "app/util/Api";
+import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MatDatepicker} from '@angular/material/datepicker';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {default as _rollupMoment, Moment} from 'moment';
 
+const moment = _rollupMoment || _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'MM/YYYY',
+  },
+  display: {
+    dateInput: 'MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 @Component({
   selector: "list",
   templateUrl: "../../../../layout/common/query-tables/index.html",
-  providers: [],
+  providers: [{
+    provide: DateAdapter,
+    useClass: MomentDateAdapter,
+    deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+  },
+
+  {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},],
 })
 export class ListComponent implements OnInit {
   public loader: boolean = true;
@@ -30,6 +57,7 @@ export class ListComponent implements OnInit {
   public filteredColor: Observable<Object>;
   public ctrltBrand = new FormControl();
   public filteredBrand: Observable<Object>;
+  public model_year = new FormControl(moment());
 
   constructor(private app: App) {}
 
@@ -179,4 +207,12 @@ export class ListComponent implements OnInit {
       this.onClickFilter();  
     }, 1000);
   }
+  
+  chosenYearHandler(normalizedYear: Moment, datepicker: MatDatepicker<Moment>) {
+    const ctrlValue = this.model_year.value;
+    ctrlValue.year(normalizedYear.year());
+    this.model_year.setValue(ctrlValue);
+    datepicker.close();
+  }
+
 }

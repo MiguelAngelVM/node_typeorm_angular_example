@@ -23,9 +23,11 @@ export class InternalHeaderComponent implements OnInit {
   public useloader: number = 0;
   public userName: string = '';
   @Input() loader: number = 0;
+  @Input() create: boolean = false;
   @Output() showFilter = new EventEmitter();
   @Output() onClickFilter = new EventEmitter();
   @Output() onClickDelete = new EventEmitter();
+  @Output() onClickStore = new EventEmitter();
 
   constructor(
     public app: App,

@@ -18,7 +18,7 @@ class Api {
 
     return {
       Authorization: auth_header,
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/json'
     };
   };
 
@@ -30,7 +30,8 @@ class Api {
     const options = {
       method: verb,
       headers: headers,
-      body: params ? "datos="+JSON.stringify(params.datos ?  params.datos  : params) : null
+      body: params ? JSON.stringify(params.datos ?  params.datos  : params) : null
+
     };
     let xFetch = await fetch(url, options);
     if(xFetch.status == 401){

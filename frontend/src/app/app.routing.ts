@@ -60,7 +60,7 @@ export const appRoutes: Route[] = [
         children   : [
             // Vehicles
             {path: 'vehicle',
-                loadChildren: () => import('app/modules/admin/vehicle/list/list.module').then(m => m.ProjectModule)
+                loadChildren: () => import('app/modules/admin/vehicle/vehicle.module').then(m => m.VehicleModule)
             },
         ]
     }

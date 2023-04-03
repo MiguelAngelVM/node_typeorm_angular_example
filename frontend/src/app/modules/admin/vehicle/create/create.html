@@ -1,0 +1,127 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+  <internal-header [loader]="loader" [create]="true" (onClickStore)="onClickStore()"></internal-header>
+  <div class="flex-auto p-6 overflow-y-auto" cdkScrollable>
+    <mat-tab-group class="demo-tab-group">
+      <mat-tab label="Datos generales" [formGroup]="generalForm">
+        <div class="row col-lg-12">
+          <mat-form-field appearance="outline" class="col-lg-4">
+            <mat-label>Estatus</mat-label>
+            <mat-select
+              placeholder="Estatus"
+              name="state"
+              [(ngModel)]="data.catCarState"
+              formControlName="state"
+            >
+              <mat-option *ngFor="let item of states" [value]="item"
+                >{{item.name}}</mat-option
+              >
+            </mat-select>
+            <mat-error
+              *ngIf="generalForm.get('state').errors && generalForm.get('state').errors.required"
+            >
+              Estatus obligatorio
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-lg-4">
+            <mat-label>Marca</mat-label>
+            <input
+              matInput
+              placeholder="Marca"
+              aria-label="Marca"
+              [matAutocomplete]="brand"
+              formControlName="brand"
+              (ngModelChange)="filterBrand($event)"
+              required="required"
+              [(ngModel)]="data.catBrand"
+            />
+            <mat-error
+              *ngIf="generalForm.get('brand').errors && generalForm.get('brand').errors.required"
+            >
+              Marca obligatorio
+            </mat-error>
+          </mat-form-field>
+          <mat-autocomplete #brand="matAutocomplete" [displayWith]="fnDisplay">
+            <mat-option
+              *ngFor="let item of filteredBrand | async"
+              [value]="item"
+            >
+              <img style="vertical-align: middle" aria-hidden height="25" />
+              <span>{{ item.name }}</span>
+            </mat-option>
+          </mat-autocomplete>
+          <mat-form-field appearance="outline" class="col-lg-4">
+            <mat-label>Color</mat-label>
+            <input
+              matInput
+              placeholder="Color"
+              aria-label="Color"
+              [matAutocomplete]="color"
+              formControlName="color"
+              (ngModelChange)="filterColor($event)"
+              required="required"
+              [(ngModel)]="data.catColor"
+            />
+            <mat-error
+              *ngIf="generalForm.get('color').errors && generalForm.get('color').errors.required"
+            >
+              Color obligatorio
+            </mat-error>
+          </mat-form-field>
+          <mat-autocomplete #color="matAutocomplete" [displayWith]="fnDisplay">
+            <mat-option
+              *ngFor="let item of filteredColor | async"
+              [value]="item"
+            >
+              <img style="vertical-align: middle" aria-hidden height="25" />
+              <span>{{ item.name }}</span>
+            </mat-option>
+          </mat-autocomplete>
+
+          <mat-form-field class="col-lg-4" appearance="outline">
+            <mat-label>Año del Modelo</mat-label>
+            <input
+              matInput
+              #model_year
+              [matDatepicker]="dpF"
+              placeholder="Año del Modelo"
+              formControlName="model_year"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="dpF"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #dpF startView="multi-year" (yearSelected)="chosenYearHandler($event, dpF)"></mat-datepicker>
+            <mat-error
+              *ngIf="generalForm.get('model_year').errors && generalForm.get('model_year').errors.required"
+            >
+              Año del Modelo obligatorio
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-lg-4" appearance="outline">
+            <mat-label>Fecha de admisión</mat-label>
+            <input
+              matInput
+              [matDatepicker]="dpF2"
+              [(ngModel)]="data.admission_date"
+              placeholder="Fecha de admisión"
+              formControlName="admission_date"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="dpF2"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #dpF2></mat-datepicker>
+            <mat-error
+              *ngIf="generalForm.get('admission_date').errors && generalForm.get('admission_date').errors.required"
+            >
+              Fecha de admisión obligatorio
+            </mat-error>
+          </mat-form-field>
+          <mat-checkbox [(ngModel)]="data.assigned" formControlName="assigned" >
+            Asignado
+          </mat-checkbox>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

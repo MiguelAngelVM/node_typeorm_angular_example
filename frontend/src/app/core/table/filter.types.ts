@@ -13,4 +13,5 @@ export interface Filter {
   fnDisplay?: Function;
   filter?: Function;
   list?: Array<Select>;
+  content?: any
 }

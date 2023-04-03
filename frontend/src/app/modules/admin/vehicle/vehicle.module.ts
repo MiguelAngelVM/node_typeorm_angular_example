@@ -14,7 +14,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { InternalHeaderModule } from "app/layout/common/internal-header/index.module";
 import { QueryTableModule } from "app/layout/common/query-tables/query-table.module";
 import { ListComponent } from "app/modules/admin/vehicle/list/list.component";
-import { vehicleRoute } from "app/modules/admin/vehicle/list/list.routing";
+import { vehicleRoute } from "app/modules/admin/vehicle/vehicle.routing";
 import { SharedModule } from "app/shared/shared.module";
 import { NgApexchartsModule } from "ng-apexcharts";
 
@@ -33,9 +33,10 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 
 import { MatNativeDateModule } from "@angular/material/core";
+import { CreateComponent } from "./create/create.component";
 
 @NgModule({
-  declarations: [ListComponent],
+  declarations: [ListComponent, CreateComponent],
   imports: [
     RouterModule.forChild(vehicleRoute),
     MatButtonModule,
@@ -67,4 +68,4 @@ import { MatNativeDateModule } from "@angular/material/core";
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
-export class ProjectModule {}
+export class VehicleModule {}

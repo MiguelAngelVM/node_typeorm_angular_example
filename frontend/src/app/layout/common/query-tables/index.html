@@ -3,7 +3,7 @@
     [loader]="loader"
     (showFilter)="isCollapsed = $event"
     (onClickFilter)="onClickFilter()"
-	(onClickDelete)="onClickDelete()"
+	  (onClickDelete)="onClickDelete()"
   ></internal-header>
   <div class="flex-auto p-6 overflow-y-auto" cdkScrollable>
     <div [hidden]="!isCollapsed" class="divfilters">

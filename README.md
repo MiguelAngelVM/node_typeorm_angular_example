@@ -14,7 +14,7 @@
 - [X] Ngrx
 
 **Additional technologies**
-- [X] AWS
+- [ ] AWS
 - [X] Postman
 - [X] Docker
 
@@ -42,6 +42,7 @@
 * Vehicle list screen
 * Vehicle delete screen
 * Vehicle filter screen
+* Vehicle create screen
 
 # **Install backend**
 
@@ -100,4 +101,7 @@ comment the next line of the migration
  **Vehicle filter screen**
  
  <img width="1440" alt="Captura de Pantalla 2023-04-03 a la(s) 1 37 48" src="https://user-images.githubusercontent.com/11168366/229442655-f2836344-0eb6-43c7-a1f9-703b0379ee10.png">
+ 
+  **Vehicle create screen**
 
+<img width="1440" alt="Captura de Pantalla 2023-04-03 a la(s) 5 33 08" src="https://user-images.githubusercontent.com/11168366/229497693-5af1dcb2-9e43-4d8d-b83e-a2f189382bf8.png">

@@ -13,7 +13,7 @@
         "test": "ng test",
         "lint": "ng lint",
         "build-dev": "nodemon -e ts,html -w ./src -x 'ng build --base-href '/app/' && gulp dist'",
-        "build-prod": "rimraf /dist && ng build --base-href '/app/' && gulp dist"
+        "build-prod": "rimraf /dist && ng build --base-href '/public/app/' && gulp dist"
     },
     "dependencies": {
         "@angular-material-components/datetime-picker": "^8.0.0",

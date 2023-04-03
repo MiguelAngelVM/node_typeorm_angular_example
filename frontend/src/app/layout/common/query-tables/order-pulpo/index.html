@@ -1,0 +1,46 @@
+<div class="row">
+  <mat-form-field appearance="outline" class="col-4">
+    <mat-label>Ordenado por</mat-label>
+    <mat-select
+      (change)="changeInput()"
+      placeholder=""
+      name="orderMethod"
+      [(ngModel)]="methods.orderMethod"
+    >
+      <div *ngFor="let column of columns">
+        <mat-option *ngIf="column.order==1" [value]="column.field">
+          {{column.name}}
+        </mat-option>
+      </div>
+    </mat-select>
+  </mat-form-field>
+  <!-- <label class="labelPrimary">&nbsp;de forma&nbsp;</label> -->
+  <mat-form-field appearance="outline" class="col-4">
+    <mat-label>De forma</mat-label>
+    <mat-select
+      (change)="changeInput()"
+      placeholder=""
+      name="order"
+      [(ngModel)]="methods!.order"
+    >
+      <mat-option value="ASC"> Ascendente </mat-option>
+      <mat-option value="DESC">Descendente </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="col-4">
+    <mat-label>Con tope de registros</mat-label>
+    <mat-select
+      (change)="changeInput()"
+      placeholder=""
+      name="row"
+      [(ngModel)]="methods.row"
+    >
+      <mat-option [value]="30"> 30 </mat-option>
+      <mat-option [value]="50"> 50 </mat-option>
+      <mat-option [value]="100"> 100 </mat-option>
+      <mat-option [value]="200"> 200 </mat-option>
+      <mat-option [value]="300"> 300 </mat-option>
+      <mat-option [value]="500"> 500 </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

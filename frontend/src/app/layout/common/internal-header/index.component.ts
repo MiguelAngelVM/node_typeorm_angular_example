@@ -15,7 +15,7 @@ import { App } from "app/app";
 
 @Component({
   selector: "internal-header",
-  templateUrl: "./internalHeader.component.html",
+  templateUrl: "./index.component.html",
 })
 export class InternalHeaderComponent implements OnInit {
   public title = "";
@@ -24,6 +24,9 @@ export class InternalHeaderComponent implements OnInit {
   public userName: string = '';
   @Input() loader: number = 0;
   @Output() showFilter = new EventEmitter();
+  @Output() onClickFilter = new EventEmitter();
+  @Output() onClickDelete = new EventEmitter();
+
   constructor(
     public app: App,
     public router: Router,
@@ -41,7 +44,6 @@ export class InternalHeaderComponent implements OnInit {
   }
 
   toggleNavigation(name: string): void {
-    // Get the navigation
     const navigation =
       this._fuseNavigationService.getComponent<FuseVerticalNavigationComponent>(
         name
@@ -53,7 +55,7 @@ export class InternalHeaderComponent implements OnInit {
     }
   }
 
-  onClickFilter = () => {
+  onClickOpenFilter = () => {
     this.isCollapsed = !this.isCollapsed;
     this.showFilter.emit(this.isCollapsed);
   };

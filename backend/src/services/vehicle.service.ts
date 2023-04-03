@@ -20,7 +20,6 @@ export const createVehicle = async (
   catColor: CatColors,
   catCarState: CatCarState
 ) => {
-  console.log(input)
   return await vehicleRepository.save(vehicleRepository.create({
     ...input, 
     catBrand, 

@@ -4,16 +4,14 @@ import {
   deleteVehicleHandler,
   // getPostHandler,
   getVehiclesHandler,
-  updateVehicleHandler,
+  updateVehicleHandler
 } from '../controllers/vehicle.controller';
 import { deserializeUser } from '../middleware/deserializeUser';
 import { requireUser } from '../middleware/requireUser';
 import { validate } from '../middleware/validate';
 import {
   createVehicleSchema,
-  deleteVehicleSchema,
-  getPostSchema,
-  updateVehicleSchema,
+  deleteVehicleSchema, updateVehicleSchema
 } from '../schemas/vehicle.schema';
 
 const router = express.Router();

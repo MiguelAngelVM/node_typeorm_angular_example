@@ -12,7 +12,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { FuseFullscreenModule } from "@fuse/components/fullscreen";
-import { InternalHeaderComponent } from "app/layout/common/internalHeader/internalHeader.component";
+import { InternalHeaderComponent } from "app/layout/common/internal-header/index.component";
 import { UserModule } from "app/layout/common/user/user.module";
 import { SharedModule } from "app/shared/shared.module";
 

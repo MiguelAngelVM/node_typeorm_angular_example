@@ -37,8 +37,8 @@ export class UserMockApi
                 
                 let user = {
                     id    : localStorage.getItem('eCodUsuario'),
-                    name  : localStorage.getItem('tNombre'),
-                    email : localStorage.getItem('tCorreo'),
+                    name  : localStorage.getItem('userName'),
+                    email : localStorage.getItem('email'),
                 }
                 return [200, cloneDeep(user)]
             });
@@ -52,8 +52,8 @@ export class UserMockApi
                 // Get the user mock-api
                 let user = {
                     id    : localStorage.getItem('eCodUsuario'),
-                    name  : localStorage.getItem('tNombre'),
-                    email : localStorage.getItem('tCorreo'),
+                    name  : localStorage.getItem('userName'),
+                    email : localStorage.getItem('email'),
                 }
                 // Update the user mock-api
                 this._user = assign({}, this._user, user);

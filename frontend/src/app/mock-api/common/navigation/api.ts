@@ -40,11 +40,11 @@ export class NavigationMockApi
             .reply(() => {                
                 this._defaultNavigation = [
                     {
-                        id      : 'dashboards',
+                        id      : 'vehicle-list',
                         title   : 'Vehiculos',
                         type    : 'basic',
                         icon    : 'heroicons_outline:truck',
-                        link : '/dashboards/project',
+                        link : '/vehicle/list',
                     }
                 ];
 

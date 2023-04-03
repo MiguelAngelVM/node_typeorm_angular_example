@@ -14,12 +14,6 @@ import validateEnv from './utils/validateEnv';
 import cluster from 'cluster';
 import os from 'os';
 
-// import nodemailer from 'nodemailer';
-// (async function () {
-//   const credentials = await nodemailer.createTestAccount();
-//   console.log(credentials);
-// })();
-
 const numCpus = os.cpus().length;
 AppDataSource.initialize()
   .then(async () => {
@@ -57,7 +51,7 @@ AppDataSource.initialize()
     app.use('/api/users', userRouter);
     app.use('/api/catalog', catalogRouter);
     app.use('/api/vehicle', vehicleRoute);
-
+        
     // HEALTH CHECKER
     app.get('/api/healthChecker', async (_, res: Response) => {
       // const message = await redisClient.get('try');
@@ -93,14 +87,10 @@ AppDataSource.initialize()
       }
 
       cluster.on('exit', (worker, code, signal) => {
-        console.log(`Worker pid: ${worker.process.pid} died`);
         cluster.fork();
       });
     } else {
       app.listen(port);
-      console.log(`Server started with pid: ${process.pid} on port: ${port}`);
-    }
-    // app.listen(port);
-    // console.log(`Server started with pid: ${process.pid} on port: ${port}`);
+    }    
   })
   .catch((error) => console.log(error));

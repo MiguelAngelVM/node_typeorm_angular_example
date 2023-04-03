@@ -22,10 +22,6 @@ export default class Email {
   }
 
   private newTransport() {
-    // if (process.env.NODE_ENV === 'production') {
-    //   console.log('Hello')
-    // }
-
     return nodemailer.createTransport({
       ...smtp,
       auth: {
@@ -53,7 +49,6 @@ export default class Email {
 
     // Send email
     const info = await this.newTransport().sendMail(mailOptions);
-    console.log(nodemailer.getTestMessageUrl(info));
   }
 
   async sendVerificationCode() {

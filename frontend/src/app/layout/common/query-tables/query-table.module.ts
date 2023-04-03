@@ -31,19 +31,19 @@ import { MatTableModule } from "@angular/material/table";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { orden4MSource } from './orden4MSource/index';
-import { tabla4MSource } from './tabla4MSource/index';
+import { orderPulpo } from './order-pulpo/index';
+import { TablePulpo } from './table-pulpo/index';
 // import { DataTableModule } from "angular2-datatable";
 
 
 @NgModule({
     declarations:[
-        orden4MSource,
-        tabla4MSource
+        orderPulpo,
+        TablePulpo
     ],
     exports:[
-        tabla4MSource,
-        orden4MSource
+        orderPulpo,
+        TablePulpo
     ],
     imports: [
         ReactiveFormsModule,
@@ -83,4 +83,4 @@ import { tabla4MSource } from './tabla4MSource/index';
    
     ],
 })
-export class PlantillasModule{}
+export class QueryTableModule{}

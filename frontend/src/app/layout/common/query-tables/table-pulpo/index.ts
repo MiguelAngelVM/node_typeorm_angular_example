@@ -2,41 +2,40 @@ import {Component, OnInit, ViewEncapsulation, Input, Output,SimpleChanges,Simple
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { App } from 'app/app';
 import {PageEvent, MatPaginator} from '@angular/material/paginator';
+import { Columns } from 'app/core/table/columns.types';
+import { Filter } from 'app/core/table/filter.types';
 declare var jquery:any;
 declare var $ :any;
 
 @Component({
-    selector: 'tabla4MSource',
+    selector: 'tablePulpo',
     templateUrl: './index.html',
     providers: []
 })
 
-export class tabla4MSource implements OnInit {
+export class TablePulpo implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
-    @Input() columnas:any=[{}];
-    @Input() filtros:any=[{}];
-    @Input() data:any=[{}];
+    @Input() columns:Array<Columns>=[];
+    @Input() filters:Array<Filter>=[];
+    @Input() data:Array<Object>=[{}];
     @Input() url:string="";
     @Input() key:string="";
-    @Input() texto1:string="";
 
-    @Input() camposEliminar:any = {};
-    @Input() funcionesMenu:any=()=>{};
-    @Output() camposEliminarEvent = new EventEmitter();
+    @Input() deleteFields:Object = {};
+    @Output() deleteFieldsEvent = new EventEmitter();
     public isCollapsed = true;
     public registros;
     public tablaLlena:number=0;
     public encotrados;
-    public MenusEmergentes;
-    public MaximosRegistros;
+    public rows;
     public loader:number=0;
-    public metodos:any = {eNumeroRegistros:100};
+    public methods:any = {rows:100};
     public rowsOnPage: number = 30;
     public filterQuery: string = "";
     public sortBy: string = "";
-    public sortOrder: string = "desc";
+    public sortOrder: string = "DESC";
     public listaparametros;
     public usuarios = [];
     public secciones = [];
@@ -46,17 +45,11 @@ export class tabla4MSource implements OnInit {
     pageIndex = 0;
     pageSizeOptions: number[] = [15, 30, 50, 100];
     pageEvent: PageEvent;
-    // <div>List length: {{pageEvent.length}}</div>
-    // <div>Page size: {{pageEvent.pageSize}}</div>
-    // <div>Page index: {{pageEvent.pageIndex}}</div>
     constructor(public app:App, public router:Router){}
 
     ngOnInit() {
-        this.menusemergentes();
     }
     ngOnChanges(changes: SimpleChanges) {
-        // let camposEliminar: SimpleChange = changes.camposEliminar;
-        // this.camposEliminar = camposEliminar.currentValue;
         if(changes.data.currentValue){
             if(this.paginator){
                 this.paginator.firstPage();
@@ -69,32 +62,21 @@ export class tabla4MSource implements OnInit {
         
     }
     
-    marcarElimnar(item) {
-		if (!item.bMarcar) {
-			this.camposEliminar[String(item[this.key])] = 1;
+    checkDelete(item) {
+		if (!item.check) {
+			this.deleteFields[String(item[this.key])] = 1;
 		} else {
-			delete this.camposEliminar[String(item[this.key])];
+			delete this.deleteFields[String(item[this.key])];
         }
-        this.camposEliminarEvent.emit(this.camposEliminar);
+        this.deleteFieldsEvent.emit(this.deleteFields);
 	}
 
-    menusemergentes() {
-		try {
-		this.app.getMenusEmergentes(this.router.url).then(response => {
-			this.MenusEmergentes = response;
-		},
-			error => { });
-		} catch (e) {
-			this.MenusEmergentes = [];
-		}
-	}
-	
 	asignarParametros(funcion, ruta, parametros, tParam) {
-		if (funcion == 'rd') {
-			this.app.asignarParametros(funcion, ruta, parametros, tParam);
-		} else {
-			this.funcionesMenu[funcion](parametros);
-		}
+		// if (funcion == 'rd') {
+		// 	this.app.asignarParametros(funcion, ruta, parametros, tParam);
+		// } else {
+		// 	this.menuFunction[funcion](parametros);
+		// }
 	}
 
     setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -102,6 +84,7 @@ export class tabla4MSource implements OnInit {
           this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
         }
     }
+
     handlePageEvent(event: PageEvent) {
         this.length = event.length;
         this.pageSize = event.pageSize;

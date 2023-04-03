@@ -1,40 +1,9 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { ListComponent } from "./list.component";
+import { TestBed } from "@angular/core/testing";
 import { App } from "app/app";
-import { HttpClient, HttpHandler,  } from "@angular/common/http";
-import { Router } from "@angular/router";
-import Api from "app/util/Api";
-import columnsTable from "./columns";
 import { Columns } from "../../../../core/table/columns.types";
+import { ListComponent } from "./list.component";
 
-import { Filter, Select } from "../../../../core/table/filter.types";
-
-const auth = async () => {
-  const credentials = {email:"pulpo@mail.com", password:"pulpo123"};
-  const login = await  Api.post(`auth/login`, credentials)
-  .then((response) => {
-    if(response.status === 'success'){
-      localStorage.setItem('accessToken', response.access_token);
-      return true;
-    }
-    return false;
-  })
-  .catch(() => {
-    return false;     
-  });
-  return login;
-}
-
-const wsList = async () => {
-  let json=JSON.stringify({ filters:{}, methods:{}});
-
-  const complete = await Api.get(`vehicle?params=${json}`).then(response => {
-      return true;
-  }).catch(() => {
-    return false;
-  });
-  return complete;
-}
+import { Filter } from "../../../../core/table/filter.types";
 
 describe("unit test ListComponent", () => {
   const app: App = new App();
@@ -66,7 +35,7 @@ describe("unit test ListComponent", () => {
     expect(listComponent.loader).toEqual(true);
     expect(listComponent.isCollapsed).toEqual(false);
     expect(listComponent.complete).toEqual(false);
-    expect(listComponent.key).toEqual('id');
+    expect(listComponent.key).toEqual("id");
     expect(listComponent.deleteFields).toEqual({});
   });
 
@@ -75,5 +44,5 @@ describe("unit test ListComponent", () => {
     expect(listComponent.columns).toBeInstanceOf(Array<Columns>);
     expect(listComponent.filters.length).toBe(0);
     expect(listComponent.columns.length).toBe(0);
-  });  
+  });
 });

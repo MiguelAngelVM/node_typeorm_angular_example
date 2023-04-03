@@ -103,7 +103,6 @@ export class CreateComponent implements OnInit {
         ...vehicle,
         model_year: moment(vehicle.model_year).year()
       };
-      console.log( moment(vehicle.model_year).year())
     }
   }
 

@@ -70,7 +70,8 @@ comment the next line of the migration
 
 
 **Postman**
-[Pulpo.postman_collection.txt](https://github.com/MiguelAngelVM/node_typeorm_angular_example/files/11127366/Pulpo.postman_collection.txt)
+[Pulpo.postman_collection.txt](https://github.com/MiguelAngelVM/node_typeorm_angular_example/files/11138504/Pulpo.postman_collection.txt)
+
 **Note, change te extension to json and import**
 <img width="1423" alt="Captura de Pantalla 2023-03-31 a la(s) 17 55 08" src="https://user-images.githubusercontent.com/11168366/229251978-90080efa-b68f-4db4-8941-bceeb44ebce3.png">
 
@@ -105,3 +106,8 @@ comment the next line of the migration
   **Vehicle create screen**
 
 <img width="1440" alt="Captura de Pantalla 2023-04-03 a la(s) 5 33 08" src="https://user-images.githubusercontent.com/11168366/229497693-5af1dcb2-9e43-4d8d-b83e-a2f189382bf8.png">
+
+
+  **Vehicle update screen**
+
+<img width="1437" alt="Captura de Pantalla 2023-04-03 a la(s) 7 05 06" src="https://user-images.githubusercontent.com/11168366/229518361-def3979c-d956-48e0-8bb5-bf9ed79be61f.png">

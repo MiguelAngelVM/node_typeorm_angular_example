@@ -37,13 +37,15 @@
 * Create structure **frontend**
 * Create auth structure 
 * Create structure file vhicle list screen
-# **Time line**
+
 **02-04-2023**
 * Vehicle list screen
 * Vehicle delete screen
 * Vehicle filter screen
 * Vehicle create screen
 * Vehicle update screen
+**03-04-2023**
+* Unit test
 
 # **Install backend**
 

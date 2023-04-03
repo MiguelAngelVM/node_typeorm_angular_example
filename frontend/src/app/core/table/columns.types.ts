@@ -1,9 +1,9 @@
 export interface Columns
 {
-    name: String,
-    field:String,
-    secondaryField?: String,
-    type: String,
+    name: string,
+    field:string,
+    secondaryField?: string,
+    type: string,
     order?: Number,
-    long?: String,
+    long?: string,
 }

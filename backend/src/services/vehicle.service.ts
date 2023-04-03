@@ -1,4 +1,5 @@
 import {
+  FindOptionsOrder,
   FindOptionsRelations,
   FindOptionsSelect,
   FindOptionsWhere,
@@ -35,11 +36,13 @@ export const getVehicle = async (vehicleId: string) => {
 export const findVehicles = async (
   where: FindOptionsWhere<Vehicle> = {},
   select: FindOptionsSelect<Vehicle> = {},
-  relations: FindOptionsRelations<Vehicle> = {}
+  relations: FindOptionsRelations<Vehicle> = {},
+  order: FindOptionsOrder<Vehicle> = {}
 ) => {
   return await vehicleRepository.find({
     where,
     select,
     relations,
+    order
   });
 };

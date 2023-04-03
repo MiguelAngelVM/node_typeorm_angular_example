@@ -102,19 +102,23 @@
 
           <div
             *ngIf="column.type=='date' && !column.secondaryField && dato[column.field] != null"
+            style="padding-top: 10px"
             [style.width]="column.long ? column.long : ''"
           >
-            {{ dato[column.field] | date:'dd/MM/yyyy' }}
+            {{ dato[column.field] | date:'dd/MM/yyyy':"GMT+0" }}
           </div>
           <div
             *ngIf="column.type=='date' && column.secondaryField && dato[column.field] != null"
             [style.width]="column.long ? column.long : ''"
+            style="padding-top: 10px"
           >
-            {{ dato[column.field][column.secondaryField] | date:'dd/MM/yyyy'}}
+            {{ dato[column.field][column.secondaryField] |
+            date:'dd/MM/yyyy':"GMT+0"}}
           </div>
           <div
             *ngIf="column.type=='year'"
             [style.width]="column.long ? column.long : ''"
+            style="padding-top: 10px"
           >
             {{ dato[column.field] | date:'yyyy' }}
           </div>

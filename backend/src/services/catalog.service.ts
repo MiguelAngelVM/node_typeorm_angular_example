@@ -10,7 +10,7 @@ const catBrandRepository = AppDataSource.getRepository(CatBrand);
 const catColorRepository = AppDataSource.getRepository(CatColors);
 const catCarStatepository = AppDataSource.getRepository(CatCarState);
 
-const like = (name:String) => {
+const like = (name:string) => {
   return {
     where: {
       name: ILike(`%${name}%`)
@@ -19,13 +19,13 @@ const like = (name:String) => {
 }
 
 export const findCatBrands = async (
-  name:String,
+  name:string,
 ) => {
   return await catBrandRepository.find(like(name));
 };
 
 export const findCatColors = async (
-  name:String,
+  name:string,
 ) => {
   return await catColorRepository.find(like(name));
 };

@@ -8,13 +8,62 @@ import { createVehicle, findVehicles, getVehicle } from '../services/vehicle.ser
 import AppError from '../utils/appError';
 import { findCatBrandsById, findCatCarStateId, findCatColorById } from '../services/catalog.service';
 
+interface Filter  {
+  field:string,
+  content:any,
+  secondaryField:string,
+  type:string,
+}
+const getFilters = (req:Request) => {
+  const json = req?.query?.params as string;
+  let where:any = {}
+  if(json){
+    const {filters} = JSON.parse(json);
+    filters.forEach((filter:Filter) => {
+      const {field, secondaryField, type,} = filter;
+
+      const content = filter.content;
+      if(!content)
+        return;
+
+      if(typeof content === "string" && secondaryField){
+        where[field] = {
+          id: content
+        }
+      }
+
+      if(typeof content === "string" && !secondaryField){
+        where[field] =  content
+      }
+
+      if(typeof content === "object" && secondaryField){
+        where[field] = {
+          id: content?.id
+        }
+      }
+
+      if(typeof content === "object" && !secondaryField){
+        where[field] =  content?.id
+      }
+
+      if(type === 'check'){
+        where[field] =  !content
+      }
+    });
+  }
+  return where;
+}
+
 export const getVehiclesHandler = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
+  
+  const where:any = getFilters(req);
+
   try {
-    const result = await findVehicles({}, {}, 
+    const result = await findVehicles(where, {}, 
       {
         catBrand:true,
         catColor:true,

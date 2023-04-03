@@ -1,15 +1,15 @@
 export interface Select {
-  id: String;
-  name: String;
+  id: string;
+  name: string;
 }
 export interface Filter {
-  name: String;
-  field: String;
-  secondaryField?: String;
-  type: String;
-  formControl?: String;
-  filteredOptions?: String;
-  display?: String;
+  name: string;
+  field: string;
+  secondaryField?: string;
+  type: string;
+  formControl?: string;
+  filteredOptions?: string;
+  display?: string;
   fnDisplay?: Function;
   filter?: Function;
   list?: Array<Select>;

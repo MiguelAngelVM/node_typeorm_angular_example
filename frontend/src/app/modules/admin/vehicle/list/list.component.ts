@@ -23,7 +23,7 @@ export class ListComponent implements OnInit {
     order: "ASC",
   };
   public complete: boolean = false;
-  public key: String = "id";
+  public key: string = "id";
   public data: Array<Object>;
   public deleteFields: Object = {};
   public ctrltColor = new FormControl();
@@ -143,7 +143,7 @@ export class ListComponent implements OnInit {
       },
       ...autocomplete,
       {
-        name: "Asignado",
+        name: "Sin Asignar",
         field: "assigned",
         type: "check",
       },

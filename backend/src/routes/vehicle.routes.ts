@@ -2,6 +2,7 @@ import express from 'express';
 import {
   createVehicleHandler,
   deleteVehicleHandler,
+  getVehicleHandler,
   // getPostHandler,
   getVehiclesHandler,
   updateVehicleHandler
@@ -11,7 +12,7 @@ import { requireUser } from '../middleware/requireUser';
 import { validate } from '../middleware/validate';
 import {
   createVehicleSchema,
-  deleteVehicleSchema, updateVehicleSchema
+  deleteVehicleSchema, getVehicleSchema, updateVehicleSchema
 } from '../schemas/vehicle.schema';
 
 const router = express.Router();
@@ -27,7 +28,7 @@ router
 
 router
   .route('/:vehicleId')
-  // .get(validate(getPostSchema), getPostHandler)
+  .get(validate(getVehicleSchema), getVehicleHandler)
   .patch(validate(updateVehicleSchema), updateVehicleHandler)
   .delete(validate(deleteVehicleSchema), deleteVehicleHandler);
 

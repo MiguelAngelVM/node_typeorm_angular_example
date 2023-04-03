@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatDatepicker } from "@angular/material/datepicker";
 import { MatDialog } from "@angular/material/dialog";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { App } from "app/app";
 import {
   CatBrand,
@@ -25,29 +25,11 @@ import { default as _rollupMoment, Moment } from "moment";
 import { DateAdapter, MAT_DATE_LOCALE } from "@angular/material/core";
 
 const moment = _rollupMoment || _moment;
-export const MY_FORMATS = {
-  parse: {
-    dateInput: "YYYY",
-  },
-  display: {
-    dateInput: "YYYY",
-    monthYearLabel: "YYYY",
-    dateA11yLabel: "LL",
-    monthYearA11yLabel: "MMMM YYYY",
-  },
-};
+
+
 @Component({
   selector: "list",
   templateUrl: "./create.html",
-  providers: [
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
-    },
-
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
-  ],
 })
 export class CreateComponent implements OnInit {
   public loader: boolean = true;
@@ -58,7 +40,10 @@ export class CreateComponent implements OnInit {
   public states: Array<Select> = [];
   public brans: Array<CatBrand> = [];
   public data: Vehicle = {
-    catCarState: undefined,
+    catCarState: {
+      name:undefined,
+      id:undefined
+    },
     catBrand: undefined,
     catColor: undefined,
   };
@@ -70,11 +55,13 @@ export class CreateComponent implements OnInit {
   public model_year: FormControl;
 
   public admission_date: FormControl;
+  public vehicleId: string;
 
   constructor(
     private app: App,
     public dialog: MatDialog,
-    public router: Router
+    public router: Router,
+    public activatedRoute: ActivatedRoute,
   ) {}
 
   /**
@@ -86,7 +73,7 @@ export class CreateComponent implements OnInit {
     this.state = new FormControl("", [Validators.required]);
     this.color = new FormControl("", [Validators.required]);
     this.assigned = new FormControl("", []);
-    this.model_year = new FormControl(moment(), [Validators.required]);
+    this.model_year = new FormControl("", [Validators.required]);
     this.admission_date = new FormControl("", [Validators.required]);
     this.generalForm = new FormGroup({
       brand: this.brand,
@@ -96,6 +83,28 @@ export class CreateComponent implements OnInit {
       model_year: this.model_year,
       admission_date: this.admission_date,
     });
+    this.validUpdate();
+  }
+
+  validUpdate = async () => {
+    this.vehicleId = this.activatedRoute?.params["value"]?.pm1;
+    if(this.vehicleId){
+      const vehicle = await Api.get(`vehicle/${this.vehicleId}`)
+      .then((response) => {
+        return response?.data?.vehicle || undefined;
+      })
+      .catch((error) => {
+        return undefined;
+      });
+      if(!vehicle){
+        return;
+      }
+      this.data = {
+        ...vehicle,
+        model_year: moment(vehicle.model_year).year()
+      };
+      console.log( moment(vehicle.model_year).year())
+    }
   }
 
   getStatus = async () => {
@@ -147,7 +156,7 @@ export class CreateComponent implements OnInit {
       dialogRef.afterClosed().subscribe((result) => {
         if (result == 1) {
           this.loader = true;
-          this.store();
+          this.createRequest();
         }
       });
     } else {
@@ -155,47 +164,79 @@ export class CreateComponent implements OnInit {
     }
   };
 
-  store = async () => {
+  createRequest = async () => {
     const dataSend: VehicleStore = {
+      id: this?.data?.id,
       assigned: this.data.assigned ? true : false,
       admission_date: this.data.admission_date,
-      model_year: this.data.model_year,
+      model_year: `${this.data.model_year}-01-01 00:00:00`,
       cat_brand_id: this.data.catBrand.id,
       cat_color_id: this.data.catColor.id,
       cat_car_state_id: this.data.catCarState.id,
     };
-    await Api.post(`vehicle/`, dataSend)
-      .then((response) => {
-        const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-          width: "250px",
-          data: {
-            titulo: response.status === "success" ? "Exito " : "Error",
-            subtitulo:
-              response.status === "success"
-                ? "La información se guardo exitosamente "
-                : "Ocurrio un error al guardar",
-          },
-        });
-
-        dialogRef.afterClosed().subscribe((result) => {
-          if (response.status === "success") {
-            this.router.navigate(["/vehicle/list"]);
-          }
-        });
-
-        this.loader = false;
-      })
-      .catch(() => {
-        this.dialog.open(DialogOverviewExampleDialog, {
-          width: "250px",
-          data: {
-            titulo: "Error",
-            subtitulo: "Ocurrio un error al guardar",
-          },
-        });
-        this.loader = false;
-      });
+    
+   this.method(dataSend);
   };
+
+  responseMethod = (response) => {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: "250px",
+      data: {
+        titulo: response.status === "success" ? "Exito " : "Error",
+        subtitulo:
+          response.status === "success"
+            ? "La información se guardo exitosamente "
+            : "Ocurrio un error al guardar",
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (response.status === "success") {
+        this.router.navigate(["/vehicle/list"]);
+      }
+    });
+
+    this.loader = false;
+  }
+
+  errorResponse = () => {
+    this.dialog.open(DialogOverviewExampleDialog, {
+      width: "250px",
+      data: {
+        titulo: "Error",
+        subtitulo: "Ocurrio un error al guardar",
+      },
+    });
+    this.loader = false;
+  }
+
+  store = async (dataSend)=> {
+    await  Api.post(`vehicle`, dataSend)
+    .then((response) => {
+      this.responseMethod(response);
+    })
+    .catch(() => {
+      this.errorResponse();
+    });
+  }
+
+  update = async (dataSend)=> {
+    await  Api.patch(`vehicle/${dataSend.id}`, dataSend)
+    .then((response) => {
+      this.responseMethod(response);
+    })
+    .catch(() => {
+      this.errorResponse();
+    });
+  }
+
+  method = async (dataSend) => {
+    if(this.data.id){
+      this.update(dataSend);
+      return;
+    }
+    this.store(dataSend);
+  }
 
   validateAllFormFields(formGroup: FormGroup) {
     try {
@@ -211,13 +252,5 @@ export class CreateComponent implements OnInit {
     } catch (e) {
       this.loader = false;
     }
-  }
-
-  chosenYearHandler(normalizedYear: Moment, datepicker: MatDatepicker<Moment>) {
-    const ctrlValue = this.model_year.value;
-    ctrlValue.year(normalizedYear.year());
-    this.model_year.setValue(ctrlValue);
-    this.data.model_year = ctrlValue;
-    datepicker.close();
   }
 }

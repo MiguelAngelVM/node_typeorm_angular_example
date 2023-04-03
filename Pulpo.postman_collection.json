@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "e37e51fc-f108-4fd8-9abd-358b872223f6",
+		"name": "Pulpo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"pulpo@mail.com\",\n    \"password\":\"pulpo123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"pulpo\",\n    \"email\":\"pulpo@mail.com\",\n    \"password\":\"pulpo123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Brands",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/catalog/brans?name=F",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"catalog",
+						"brans"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "F"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Colors",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/catalog/colors?name=Rojo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"catalog",
+						"colors"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Rojo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Car State",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/catalog/states",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"catalog",
+						"states"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vehicle List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/vehicle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vehicle Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"assigned\":true,\n    \"admission_date\":\"2018-01-01 12:13:00\",\n    \"model_year\":\"2017-01-01\",\n    \"cat_brand_id\": \"14b03ab2-cf5d-4312-b60d-9d716bae0361\",\n    \"cat_color_id\": \"71766b5e-ae9b-4be1-b4c1-81b87706faef\", \n    \"cat_car_state_id\": \"49276584-3acb-42fd-970a-390c204f2135\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/vehicle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vehicle Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"assigned\":true,\n    \"admission_date\":\"2018-01-01 12:13:00\",\n    \"model_year\":\"2017-01-01\",\n    \"cat_brand_id\": \"14b03ab2-cf5d-4312-b60d-9d716bae0361\",\n    \"cat_color_id\": \"71766b5e-ae9b-4be1-b4c1-81b87706faef\", \n    \"cat_car_state_id\": \"49276584-3acb-42fd-970a-390c204f2135\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/vehicle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vehicle Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/vehicle/523698a8-a562-48cc-854c-b26da85e3456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"vehicle",
+						"523698a8-a562-48cc-854c-b26da85e3456"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vehicle",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/vehicle/523698a8-a562-48cc-854c-b26da85e3456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"vehicle",
+						"523698a8-a562-48cc-854c-b26da85e3456"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

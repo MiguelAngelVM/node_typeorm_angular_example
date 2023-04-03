@@ -1,5 +1,9 @@
 <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
-  <internal-header [loader]="loader" [create]="true" (onClickStore)="onClickStore()"></internal-header>
+  <internal-header
+    [loader]="loader"
+    [create]="true"
+    (onClickStore)="onClickStore()"
+  ></internal-header>
   <div class="flex-auto p-6 overflow-y-auto" cdkScrollable>
     <mat-tab-group class="demo-tab-group">
       <mat-tab label="Datos generales" [formGroup]="generalForm">
@@ -9,10 +13,10 @@
             <mat-select
               placeholder="Estatus"
               name="state"
-              [(ngModel)]="data.catCarState"
+              [(ngModel)]="data.catCarState.id"
               formControlName="state"
             >
-              <mat-option *ngFor="let item of states" [value]="item"
+              <mat-option *ngFor="let item of states" [value]="item.id"
                 >{{item.name}}</mat-option
               >
             </mat-select>
@@ -76,48 +80,45 @@
               <span>{{ item.name }}</span>
             </mat-option>
           </mat-autocomplete>
-
-          <mat-form-field class="col-lg-4" appearance="outline">
-            <mat-label>Año del Modelo</mat-label>
+          <mat-form-field appearance="outline" class="col-md-4">
+            <mat-label>Año del modelo</mat-label>
             <input
               matInput
-              #model_year
-              [matDatepicker]="dpF"
-              placeholder="Año del Modelo"
+              placeholder="Año del modelo"
               formControlName="model_year"
+              [(ngModel)]="data.model_year"
+              type="text"
+              type="number"
+              required
             />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="dpF"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #dpF startView="multi-year" (yearSelected)="chosenYearHandler($event, dpF)"></mat-datepicker>
             <mat-error
               *ngIf="generalForm.get('model_year').errors && generalForm.get('model_year').errors.required"
             >
-              Año del Modelo obligatorio
+              Este campo es obligatorio
             </mat-error>
           </mat-form-field>
           <mat-form-field class="col-lg-4" appearance="outline">
             <mat-label>Fecha de admisión</mat-label>
             <input
+              #admission_date
               matInput
-              [matDatepicker]="dpF2"
+              [matDatepicker]="dpFX"
               [(ngModel)]="data.admission_date"
               placeholder="Fecha de admisión"
               formControlName="admission_date"
             />
             <mat-datepicker-toggle
               matSuffix
-              [for]="dpF2"
+              [for]="dpFX"
             ></mat-datepicker-toggle>
-            <mat-datepicker #dpF2></mat-datepicker>
+            <mat-datepicker #dpFX></mat-datepicker>
             <mat-error
               *ngIf="generalForm.get('admission_date').errors && generalForm.get('admission_date').errors.required"
             >
               Fecha de admisión obligatorio
             </mat-error>
           </mat-form-field>
-          <mat-checkbox [(ngModel)]="data.assigned" formControlName="assigned" >
+          <mat-checkbox [(ngModel)]="data.assigned" formControlName="assigned">
             Asignado
           </mat-checkbox>
         </div>

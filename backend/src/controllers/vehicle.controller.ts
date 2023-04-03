@@ -2,11 +2,15 @@ import { NextFunction, Request, Response } from 'express';
 import {
   UpdateVehicleInput,
   CreateVehicleSchema,
-  DeleteVehicleInput
+  DeleteVehicleInput,
+  GetVehicleInput
 } from '../schemas/vehicle.schema';
 import { createVehicle, findVehicles, getVehicle } from '../services/vehicle.service';
 import AppError from '../utils/appError';
 import { findCatBrandsById, findCatCarStateId, findCatColorById } from '../services/catalog.service';
+import { CatBrand } from '../entities/cat_brand.entity';
+import { CatColors } from '../entities/cat_color.entity';
+import { CatCarState } from '../entities/cat_car_state.entity';
 
 interface Filter  {
   field:string,
@@ -123,7 +127,15 @@ export const updateVehicleHandler = async (
       return next(new AppError(404, 'Vehicle with that ID not found'));
     }
 
+    const catBrand = await findCatBrandsById(req.body.cat_brand_id as string) as CatBrand;
+    const catColor = await findCatColorById(req.body.cat_color_id as string) as CatColors;
+    const catCarState = await findCatCarStateId(req.body.cat_car_state_id as string) as CatCarState;
+
     Object.assign(vehicle, req.body);
+    console.log(req.body)
+    vehicle.catBrand = catBrand;
+    vehicle.catColor = catColor;
+    vehicle.catCarState = catCarState;
 
     const updatedvehicle = await vehicle.save();
 
@@ -155,6 +167,30 @@ export const deleteVehicleHandler = async (
     res.status(204).json({
       status: 'success',
       data: null,
+    });
+  } catch (err: any) {
+    next(err);
+  }
+};
+
+export const getVehicleHandler = async (
+  req: Request<GetVehicleInput>,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const vehicle = await getVehicle(req.params.vehicleId);
+
+    if (!vehicle) {
+      return next(new AppError(404, 'Vehicle with that ID not found'));
+    }
+
+   
+    res.status(200).json({
+      status: 'success',
+      data: {
+        vehicle: vehicle,
+      },
     });
   } catch (err: any) {
     next(err);

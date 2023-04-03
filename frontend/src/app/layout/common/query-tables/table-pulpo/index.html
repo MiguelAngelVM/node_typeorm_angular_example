@@ -70,7 +70,7 @@
             </button>
             <mat-menu #menu="matMenu">
               <div style="height: auto; max-height: 320px">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="this.router.navigate(['/vehicle/create', { pm1: dato[column.field]  }])">
                   <span>Editar</span>
                 </button>
               </div>

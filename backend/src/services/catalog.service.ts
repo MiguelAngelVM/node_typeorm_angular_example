@@ -31,7 +31,7 @@ export const findCatColors = async (
 };
 
 export const findCatCarState = async () => {
-  return await catCarStatepository.find();
+  return await catCarStatepository.find({select:['id', 'name']});
 };
 
 export const findCatBrandsById = async (catBrandsId: string) => {

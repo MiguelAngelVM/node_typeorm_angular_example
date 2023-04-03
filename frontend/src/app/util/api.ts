@@ -46,6 +46,10 @@ class Api {
     return this.xhr(route, null, 'GET');
   }
 
+  static patch(route, params) {
+    return this.xhr(route, params, 'PATCH');
+  }
+
   static post(route, params) {
     return this.xhr(route, params, 'POST');
   }

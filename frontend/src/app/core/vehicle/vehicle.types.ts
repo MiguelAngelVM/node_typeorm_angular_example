@@ -14,6 +14,7 @@ export interface CatCarState {
 }
 
 export interface Vehicle {
+  id?: string,
   catCarState: CatCarState,
   catBrand?: CatBrand
   catColor?: CatColor,
@@ -23,9 +24,10 @@ export interface Vehicle {
 }
 
 export interface VehicleStore {
+  id?:string,
   assigned: boolean
   admission_date: Date,
-  model_year: number,
+  model_year: string,
   cat_brand_id: string,
   cat_color_id: string
   cat_car_state_id: string

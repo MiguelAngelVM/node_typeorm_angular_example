@@ -30,7 +30,10 @@ export const createVehicle = async (
 };
 
 export const getVehicle = async (vehicleId: string) => {
-  return await vehicleRepository.findOneBy({ id: vehicleId });
+  return await vehicleRepository.findOne({ 
+    where: {id: vehicleId},
+    relations: ['catBrand', 'catColor', 'catCarState'],
+  });
 };
 
 export const findVehicles = async (

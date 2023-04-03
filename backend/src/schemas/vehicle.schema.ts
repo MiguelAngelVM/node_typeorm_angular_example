@@ -1,4 +1,4 @@
-import { boolean, date, object, string, TypeOf } from 'zod';
+import { boolean, date, number, object, string, TypeOf } from 'zod';
 
 const basicVehicle = {
   body: object({
@@ -64,6 +64,11 @@ export const deleteVehicleSchema = object({
   ...params,
 });
 
+export const getVehicleSchema = object({
+  ...params,
+});
+
 export type CreateVehicleSchema = TypeOf<typeof createVehicleSchema>['body'];
 export type UpdateVehicleInput = TypeOf<typeof updateVehicleSchema>;
 export type DeleteVehicleInput = TypeOf<typeof deleteVehicleSchema>['params'];
+export type GetVehicleInput = TypeOf<typeof getVehicleSchema>['params'];

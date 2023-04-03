@@ -5,7 +5,7 @@
 - [X] Typescript
 - [X] Typeorm
 - [X] Postgres
-- [ ] Jest
+- [X] Unit test
 
 **Requested technologies frontend**
 - [X] Angular
@@ -116,8 +116,12 @@ comment the next line of the migration
 
 # **Video**
 
-
-
 https://user-images.githubusercontent.com/11168366/229525724-c40b42d9-f0d3-49c2-a42b-d9dcf1ecc569.mp4
 
+# **Unit Test jasmine**
+**Run test**
+* npm run test
 
+* frontend/src/app/ni-components/ni-card/ni-card.component.spec.ts
+* frontend/src/app/modules/admin/vehicle/list/list.component.spec.ts
+* frontend/src/app/modules/auth/sign-in/sign-in.component.spec.ts

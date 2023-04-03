@@ -37,6 +37,11 @@
 * Create structure **frontend**
 * Create auth structure 
 * Create structure file vhicle list screen
+# **Time line**
+**02-04-2023**
+* Vehicle list screen
+* Vehicle delete screen
+* Vehicle filter screen
 
 # **Install backend**
 
@@ -83,4 +88,15 @@ comment the next line of the migration
 
 <img width="1350" alt="Captura de Pantalla 2023-03-31 a la(s) 18 32 17" src="https://user-images.githubusercontent.com/11168366/229256637-dfa2f6fe-7680-43db-961a-92be722b77c3.png">
 
+**Vehicle list screen**
+
+<img width="1439" alt="Captura de Pantalla 2023-04-03 a la(s) 1 09 17" src="https://user-images.githubusercontent.com/11168366/229442378-f58016bf-756f-4772-a925-80fcfa4d697e.png">
+
+**Vehicle select and delete screen**
+
+ <img width="1438" alt="Captura de Pantalla 2023-04-03 a la(s) 1 25 50" src="https://user-images.githubusercontent.com/11168366/229442563-0834eec6-a8d2-4717-a211-00b3df03dad0.png">
+ 
+ **Vehicle filter screen**
+ 
+ <img width="1440" alt="Captura de Pantalla 2023-04-03 a la(s) 1 37 48" src="https://user-images.githubusercontent.com/11168366/229442655-f2836344-0eb6-43c7-a1f9-703b0379ee10.png">
 

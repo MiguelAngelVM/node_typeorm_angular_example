@@ -132,7 +132,6 @@ export const updateVehicleHandler = async (
     const catCarState = await findCatCarStateId(req.body.cat_car_state_id as string) as CatCarState;
 
     Object.assign(vehicle, req.body);
-    console.log(req.body)
     vehicle.catBrand = catBrand;
     vehicle.catColor = catColor;
     vehicle.catCarState = catCarState;

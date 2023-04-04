@@ -13,7 +13,6 @@ class Api {
       keychainService: ''
     };
     let token = await localStorage.getItem('token');
-    console.log(token)
     let auth_header = 'Bearer ' + token;
 
     return {
